@@ -35,4 +35,11 @@
 * Debug Case Study
 * Search / Tag Feature
 
+## Product Backlog
+* Initial Selected Boxes ✅
+* Milestones ✅
+
+## Access
+* Collaborator Repo Access ✅
+* GCP SSH Access Configured student-key ✅
 
