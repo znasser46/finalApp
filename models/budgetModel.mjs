@@ -16,6 +16,10 @@ export async function getAllBudgets() {
   return await collection.find({}).toArray();
 }
 
+export async function getBudgetsByUser(userId) {
+  return await collection.find({ userId }).toArray();
+}
+
 export async function updateBudget(id, data) {
   return await collection.updateOne(
     { _id: new ObjectId(id) },
