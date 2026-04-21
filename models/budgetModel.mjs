@@ -1,4 +1,4 @@
-import { client } from '../config/dbConfig.mjs';
+import { client } from '../config/dbconfig.mjs';
 import { ObjectId } from 'mongodb';
 
 const db = client.db('cis486');
