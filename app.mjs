@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 import budgetRoutes from './routes/budgetRoutes.mjs';
-import { connectToMongo } from './config/dbConfig.mjs';
+import { connectToMongo } from './config/dbconfig.mjs';
 
 const app = express();
 
