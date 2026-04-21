@@ -21,6 +21,9 @@ connectToMongo();
 
 // routes
 app.use('/api/budgets', budgetRoutes);
+import authorizationRoutes from './routes/authorizationRoutes.mjs';
+
+app.use('/api/auth', authorizationRoutes);
 
 // homepage
 app.get('/', (req, res) => {

@@ -1,4 +1,8 @@
 
+if (!localStorage.getItem('token')) {
+  window.location.href = '/login.html';
+}
+
 let editingId = null;
 
 // Handle form submission
@@ -40,8 +44,9 @@ document.getElementById('budgetForm').addEventListener('submit', async (e) => {
     const response = await fetch(url, {
       method: method,
       headers: {
-        'Content-Type': 'application/json'
-      },
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+    },
       body: JSON.stringify({
         name,
         income,
@@ -80,7 +85,11 @@ document.getElementById('budgetForm').addEventListener('submit', async (e) => {
 //once it gets the list id, it creates a new div for each budget and stores its information.
 async function loadBudgets() {
   try {
-    const response = await fetch('/api/budgets');
+    const response = await fetch('/api/budgets', {
+  headers: {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  }
+});
     const budgets = await response.json();
 
     const budList = document.getElementById('budgetList');
@@ -132,7 +141,10 @@ async function deleteBudget(id) {
 
   try {
     const response = await fetch(`/api/budgets/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+     }
     });
 
     const result = await response.json();
@@ -159,4 +171,6 @@ function showMessage(text, type) {
 }
 
 //Loads the budgets onto the page
-loadBudgets();
+if (localStorage.getItem('token')) {
+  loadBudgets();
+}

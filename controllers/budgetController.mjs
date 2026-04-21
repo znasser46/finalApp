@@ -2,7 +2,10 @@ import * as Budget from '../models/budgetModel.mjs';
 
 export async function create(req, res) {
   try {
-    const data = req.body;
+    const data = {
+  ...req.body,
+  userId: req.user.userId
+};
 
     if (!data.name || !data.income) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -18,7 +21,7 @@ export async function create(req, res) {
 
 export async function getAll(req, res) {
   try {
-    const budgets = await Budget.getAllBudgets();
+    const budgets = await Budget.getBudgetsByUser(req.user.userId);
     res.json(budgets);
   } catch {
     res.status(500).json({ error: 'Failed to get budget records' });
