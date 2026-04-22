@@ -6,9 +6,22 @@ const collection = db.collection('budgets');
 
 export async function createBudget(data) {
   const result = await collection.insertOne({
-    ...data,
+    name: data.name,
+    income: data.income,
+    transportation: data.transportation,
+    rent: data.rent,
+    groceries: data.groceries,
+    utility: data.utility,
+    household: data.household,
+    entertainment: data.entertainment,
+    clothes: data.clothes,
+    healthcare: data.healthcare,
+    totalExpenses: data.totalExpenses,
+    remaining: data.remaining,
+    userId: data.userId,
     timestamp: new Date()
   });
+
   return result;
 }
 
