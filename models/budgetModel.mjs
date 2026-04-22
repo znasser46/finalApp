@@ -6,9 +6,22 @@ const collection = db.collection('budgets');
 
 export async function createBudget(data) {
   const result = await collection.insertOne({
-    ...data,
+    name: data.name,
+    income: data.income,
+    transportation: data.transportation,
+    rent: data.rent,
+    groceries: data.groceries,
+    utility: data.utility,
+    household: data.household,
+    entertainment: data.entertainment,
+    clothes: data.clothes,
+    healthcare: data.healthcare,
+    totalExpenses: data.totalExpenses,
+    remaining: data.remaining,
+    userId: data.userId,
     timestamp: new Date()
   });
+
   return result;
 }
 
@@ -16,9 +29,6 @@ export async function getAllBudgets() {
   return await collection.find({}).toArray();
 }
 
-export async function getBudgetsByUser(userId) {
-  return await collection.find({ userId }).toArray();
-}
 
 export async function updateBudget(id, data) {
   return await collection.updateOne(
@@ -29,4 +39,15 @@ export async function updateBudget(id, data) {
 
 export async function deleteBudget(id) {
   return await collection.deleteOne({ _id: new ObjectId(id) });
+}
+
+export async function getBudgetsByUser(userId, search) {
+  let query = {
+    userId
+  };
+
+  if (search) {
+    query.name = { $regex: search, $options: "i" };
+  }
+  return await collection.find(query).toArray();
 }
