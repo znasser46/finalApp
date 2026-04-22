@@ -83,27 +83,36 @@ document.getElementById('budgetForm').addEventListener('submit', async (e) => {
 
 //This function fetches the budgets api to dynamically generate the budget list at the bottom of the index page.
 //once it gets the list id, it creates a new div for each budget and stores its information.
-async function loadBudgets() {
+async function loadBudgets(search = "") {
   try {
-    const response = await fetch('/api/budgets', {
-  headers: {
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
-  }
-});
+    let url = '/api/budgets';
+
+    // 👇 add search query if it exists
+    if (search) {
+      url += `?search=${encodeURIComponent(search)}`;
+    }
+
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+
     const budgets = await response.json();
 
     const budList = document.getElementById('budgetList');
 
     if (budgets.length === 0) {
-      budList.innerHTML = '<p>No budgets yet.</p>';
+      budList.innerHTML = '<p>No budgets found.</p>';
       return;
     }
 
     budList.innerHTML = budgets.map(budget => `
-          <div class="record">
+      <div class="record">
         <strong>${budget.name}</strong> - Monthly Income: $${budget.income}<br>
         <strong>Expenses:</strong> Transportation $${budget.transportation}, Rent $${budget.rent}, Groceries $${budget.groceries}, Utility $${budget.utility}, Household $${budget.household}, Entertainment $${budget.entertainment}, Clothes $${budget.clothes}, Healthcare $${budget.healthcare}<br>
-        <strong>Total Expenses:</strong> $${budget.totalExpenses} | <strong>Discretionary Income:</strong> $${budget.remaining}<br>  <button class="edit-btn btn btn-secondary" onclick="editBudget('${budget._id}', '${budget.name}', '${budget.income}', '${budget.transportation}', '${budget.rent}', '${budget.groceries}', '${budget.utility}', '${budget.household}', '${budget.entertainment}', '${budget.clothes}' , '${budget.healthcare}')">Edit</button> 
+        <strong>Total Expenses:</strong> $${budget.totalExpenses} | <strong>Discretionary Income:</strong> $${budget.remaining}<br>  
+        <button class="edit-btn btn btn-secondary" onclick="editBudget('${budget._id}', '${budget.name}', '${budget.income}', '${budget.transportation}', '${budget.rent}', '${budget.groceries}', '${budget.utility}', '${budget.household}', '${budget.entertainment}', '${budget.clothes}' , '${budget.healthcare}')">Edit</button> 
         <button class="delete-btn btn btn-danger" onclick="deleteBudget('${budget._id}')">Delete</button>
         <small>Recorded on: ${new Date(budget.timestamp).toLocaleString()}</small>
       </div>
@@ -174,3 +183,8 @@ function showMessage(text, type) {
 if (localStorage.getItem('token')) {
   loadBudgets();
 }
+
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  loadBudgets(e.target.value);
+});

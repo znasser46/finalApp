@@ -16,9 +16,6 @@ export async function getAllBudgets() {
   return await collection.find({}).toArray();
 }
 
-export async function getBudgetsByUser(userId) {
-  return await collection.find({ userId }).toArray();
-}
 
 export async function updateBudget(id, data) {
   return await collection.updateOne(
@@ -29,4 +26,15 @@ export async function updateBudget(id, data) {
 
 export async function deleteBudget(id) {
   return await collection.deleteOne({ _id: new ObjectId(id) });
+}
+
+export async function getBudgetsByUser(userId, search) {
+  let query = {
+    userId
+  };
+
+  if (search) {
+    query.name = { $regex: search, $options: "i" };
+  }
+  return await collection.find(query).toArray();
 }
