@@ -42,4 +42,5 @@
 ## Access
 * Collaborator Repo Access ✅
 * GCP SSH Access Configured student-key ✅
+* ssh -i devops-key bcumbie@34.186.23.80
 

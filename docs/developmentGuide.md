@@ -1,69 +1,151 @@
-## GCP Setup Guide:
-Set region to us-central1
-set zone to any
+# GCP Setup Guide
 
-set the machine family to e2
-select the type as e2 micro
+## GCP VM Configuration
 
-Next go to the firewall settings
-make sure to allow HTTP traffic
-and https traffic
+Set region to `us-central1`  
+Set zone to any  
 
+Set the machine family to `e2`  
+Select the type as `e2-micro`  
 
-### Networking:
-Change the ephemeral external IPv4 to a static IP
-Set the name, type, and region
-reserve
+Next go to firewall settings:
+*  Allow HTTP traffic
+* Allow HTTPS traffic  
 
+---
 
-Add ssh key or use the ssh 
+## Networking
 
+Change the ephemeral external IPv4 to a static IP  
 
-## NGINX and PM2
-For setting up NGINX and PM2
+Set:
+* Name
+* Type
+* Region  
 
-First run: sudo apt update
+Click **Reserve**
 
-Then install node: sudo apt install nodejs npm git nginx -y
+Add SSH key or use built-in SSH access  
 
-Verify version looks correct: node -v
+---
+
+# NGINX and PM2 Setup
+
+## Install Dependencies
+
+```bash
+sudo apt update
+sudo apt install nodejs npm git nginx -y
+```
+
+Check versions:
+
+```bash
+node -v
 npm -v
+```
 
-Then install PM2: sudo npm install pm2 -g
+---
 
-Clone project in to server:
+## Install PM2
+
+```bash
+sudo npm install pm2 -g
+```
+
+---
+
+## Clone Project
+
+```bash
 git clone repolink
-
 cd folder/name
+```
 
+---
+
+## Environment Setup
+
+Create env file:
+
+```bash
 touch .env
 cat .env
+```
 
+Edit env file:
+
+```bash
 sudo vim .env
+```
 
-copy in MONGO_URI = connection_string
+Add:
 
+```bash
+MONGO_URI=connection_string
+```
+
+Save and exit:
+
+```bash
 esc
 :wq
+```
 
+Install dotenv:
+
+```bash
 npm i dotenv
+```
 
+Install dependencies:
+
+```bash
 npm install
+```
 
-Use node app.mjs to see if its working
+Test app:
 
-## NGINX Setup:
+```bash
+node app.mjs
+```
+
+---
+
+# NGINX Setup
+
+Start nginx:
+
+```bash
 sudo systemctl start nginx
-sudo system enable nginx
+```
 
-remove the default site: 
+Enable nginx:
+
+```bash
+sudo systemctl enable nginx
+```
+
+Remove default site:
+
+```bash
 sudo unlink /etc/nginx/sites-enabled/default
 sudo rm /etc/nginx/sites-enabled/default
+```
 
-make the reverse proxy:
+---
+
+# Reverse Proxy Setup
+
+Create config:
+
+```bash
 sudo vim /etc/nginx/sites-available/reverse-proxy
+```
 
-Paste this in:
+Paste this:
+
+```nginx
 server {
   listen 80;
   server_name _;
@@ -76,22 +158,55 @@ server {
     proxy_set_header X-Forwarded-Proto $scheme;
   }
 }
+```
 
-Enable the sites:
+Enable site:
+
+```bash
 sudo ln -s /etc/nginx/sites-available/reverse-proxy /etc/nginx/sites-enabled/
+```
 
 Reload nginx:
+
+```bash
 sudo systemctl reload nginx
+```
 
-PM2:
+---
+
+# PM2 Process Management
+
+Start app:
+
+```bash
 pm2 start app.mjs
+```
+
+Check status:
+
+```bash
 pm2 status
+```
+
+Save process list:
+
+```bash
 pm2 save
+```
 
+Enable startup:
+
+```bash
 pm2 startup
+```
 
 
+# NGINX and PM2 Explanation:
+NGINX was used for the reverse proxy in this server. It routes any client requests to the correct ports.
 
+PM2 was used to keep the app running on the production server. The PM2 startup command tells the server to restart the app on server startup.
 
+# Environment Variables
+mongodb+srv://znasser:<dbPassword>@cluster0.gh5umgu.mongodb.net/?appName=Cluster0
 
-
+JWT_SECRET= json_web_token_secret
