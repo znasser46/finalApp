@@ -21,6 +21,7 @@ This app provides a free, simple, convienent and localized way to track spending
 
 
 # Capability Boxes: (70 pts)
+
 | Category | Description | Links | Notes |
 |----------|-------------|-------|-------|
 | Advanced Architecture (10) | I refactored to the modern node structure. This includes routes, controllers, models, and middlewares. | [Entry #2](https://github.com/znasser46/finalApp/blob/main/docs/devNotebook.md#42026:~:text=4/20/26,NGINX%20and%20PM2) [Code Example](https://github.com/znasser46/finalApp/blob/878294d58acd5c6c4e25489c4ec904e9ee1c47b2/routes/budgetRoutes.mjs#L1-L3) | The process primairy consisted of seperating the logic of the code, making it more modular. |
