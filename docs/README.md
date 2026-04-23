@@ -15,7 +15,7 @@ This app provides a budgeting calculator solution for people who want to track t
 ## Value Proposition:
 This app provides a free, simple, convienent and localized way to track spending and discretionary income that can help someone who is looking to start tracking their spending habits but doesnt want to generate thier own budgeting process. 
 
-![Budget App comparison](../public/assets/image.png)
+![Budget App comparison](https://raw.githubusercontent.com/znasser46/finalApp/refs/heads/main/public/assets/image.png)
 
 [App Comparison](https://www.icansucceed.org/)
 
