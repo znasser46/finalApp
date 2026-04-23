@@ -133,7 +133,7 @@ async function loadBudgets(search = "") {
         budList.innerHTML = budgets.map(budget => `
       <div class="record">
         <strong>${budget.name}</strong> - Monthly Income: $${budget.income}<br>
-        <strong>Expenses:</strong> Transportation $${budget.transportation}, Rent $${budget.rent}, Groceries $${budget.groceries}, Utility $${budget.utility}, Household $${budget.household}, Entertainment $${budget.entertainment}, Clothes $${budget.clothes}, Healthcare $${budget.healthcare}<br>
+        <strong>Expenses:</strong> Transportation $${budget.transportation}, Rent $${budget.rent}, Groceries $${budget.groceries}, Utility $${budget.utility}, Household $${budget.household}, Entertainment $${budget.entertainment}, Debt $${budget.clothes}, Healthcare $${budget.healthcare}<br>
         <strong>Total Expenses:</strong> $${budget.totalExpenses} | <strong>Discretionary Income:</strong> $${budget.remaining}<br>  
         <button class="edit-btn btn btn-secondary" onclick="editBudget('${budget._id}', '${budget.name}', '${budget.income}', '${budget.transportation}', '${budget.rent}', '${budget.groceries}', '${budget.utility}', '${budget.household}', '${budget.entertainment}', '${budget.clothes}' , '${budget.healthcare}')">Edit</button> 
         <button class="delete-btn btn btn-danger" onclick="deleteBudget('${budget._id}')">Delete</button>

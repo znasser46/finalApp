@@ -60,3 +60,72 @@ footer {
   padding: 20px;
   border-radius: 8px;
 }
+
+.mainBody {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+}
+
+#login {
+  width: 350px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.loginContainer {
+  min-height: 100vh;
+  background: rgb(67, 66, 66);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginBackground {
+  width: 450px; 
+  padding: 40px;
+  background: rgb(141, 140, 140);
+
+  border: 2px solid black;
+  border-radius: 12px;
+}
+
+.loginButton {
+  margin: 4px;
+}
+
+#register {
+  width: 350px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.registerContainer {
+  min-height: 100vh;   
+  background: rgb(67, 66, 66);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registerBackground {
+  width: 450px;     
+  padding: 40px;
+  background: rgb(141, 140, 140);
+
+  border: 2px solid black;
+  border-radius: 12px;
+}
+
+.registerButton {
+  margin: 10px;
+}

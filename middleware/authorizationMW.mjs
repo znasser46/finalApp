@@ -4,7 +4,7 @@ export function authMiddleware(req, res, next) {
   const header = req.headers.authorization;
 
   if (!header) {
-    return res.status(401).json({ error: 'No token' });
+    return res.status(401).json({ error: 'Access token required' });
   }
 
   try {
