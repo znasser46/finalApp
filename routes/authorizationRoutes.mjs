@@ -5,7 +5,7 @@ import { generateToken } from '../utility/authorization.mjs';
 
 const router = express.Router();
 
-// REGISTER
+// Register new users
 router.post('/register', async (req, res) => {
   const { username, password } = req.body;
 
@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
   res.json({ message: 'User created' });
 });
 
-// LOGIN
+// Login for existing users
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
