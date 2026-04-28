@@ -110,7 +110,7 @@ async function loadBudgets(search = "") {
     try {
         let url = '/api/budgets';
 
-        // 👇 add search query if it exists
+        // add search query if it exists
         if (search) {
             url += `?search=${encodeURIComponent(search)}`;
         }
